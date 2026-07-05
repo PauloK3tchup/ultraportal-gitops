@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ultraportal-backend
+  namespace: ultraportal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ultraportal-backend
+  template:
+    metadata:
+      labels:
+        app: ultraportal-backend
+    spec:
+      containers:
+        - name: backend
+          image: paulok3tchup/ultraportal-backend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: PYTHONDONTWRITEBYTECODE
+              value: "1"
+            - name: PYTHONUNBUFFERED
+              value: "1"
+          readinessProbe:
+            httpGet:
+              path: /api/site-content/
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/site-content/
+              port: 8000
+            initialDelaySeconds: 20
+            periodSeconds: 20

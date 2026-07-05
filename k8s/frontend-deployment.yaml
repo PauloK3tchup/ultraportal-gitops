@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ultraportal-frontend
+  namespace: ultraportal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ultraportal-frontend
+  template:
+    metadata:
+      labels:
+        app: ultraportal-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: paulok3tchup/ultraportal-frontend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5173
+          env:
+            - name: VITE_API_URL
+              value: http://ultraportal-backend-service:8000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5173
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5173
+            initialDelaySeconds: 20
+            periodSeconds: 20
