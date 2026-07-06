@@ -10,7 +10,7 @@ resources:
 images:
 - name: paulok3tchup/ultraportal-backend
   newName: paulok3tchup/ultraportal-backend
-  newTag: 6e0310432b087d6b9c221924e4bf1c78e98f6dc7
+  newTag: f58038ed66b256af99600ee900e1c2c31ba84f4d
 - name: paulok3tchup/ultraportal-frontend
   newName: paulok3tchup/ultraportal-frontend
-  newTag: 6e0310432b087d6b9c221924e4bf1c78e98f6dc7
+  newTag: f58038ed66b256af99600ee900e1c2c31ba84f4d
